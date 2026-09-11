@@ -74,10 +74,12 @@ def create_app():
     return app
 
 
+# Create Flask app instance for deployment platforms (like Vercel)
+app = create_app()
+
 if __name__ == "__main__":
     check_ocr_engine()
     if not test_connection():
         print("ERROR: Couldn't connect to database", file=sys.stderr)
         sys.exit(1)
-    app = create_app()
     app.run(host=Config.HOST, port=Config.PORT, debug=Config.DEBUG)
