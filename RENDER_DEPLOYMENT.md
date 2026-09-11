@@ -1,6 +1,6 @@
 Backend Build Command: pip install -r requirements.txt
 
-Backend Start Command: gunicorn app:create_app()
+Backend Start Command: gunicorn --bind 0.0.0.0:$PORT "app:create_app()"
 
 Frontend Build Command: npm install && npm run build
 
