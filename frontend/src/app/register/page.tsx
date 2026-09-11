@@ -23,14 +23,14 @@ export default function RegisterPage() {
       <div className="auth-national-bg" aria-hidden="true"><div className="auth-orb auth-orb-a" /><div className="auth-orb auth-orb-b" /><div className="auth-tricolor" /></div>
       <section className="auth-shell">
         <div className="auth-showcase">
-          <div className="auth-brand"><div className="auth-emblem"><ShieldCheck size={29} /></div><div><strong>CT-OS</strong><small>National Identity Screening</small></div></div>
+          <div className="auth-brand"><div className="auth-emblem"><ShieldCheck size={29} /></div><div><strong>DocKavach</strong><small>National Identity Screening</small></div></div>
           <div className="auth-showcase-copy">
             <div className="auth-kicker"><Landmark size={13} /> Operator provisioning</div>
             <h1>One secure account. <span>One clear workflow.</span></h1>
-            <p>Create an operator profile for the CT-OS screening centre. Your account is used to authenticate screening requests and associate audit records with the authorized operator.</p>
+            <p>Create an operator profile for the DocKavach screening centre. Your account is used to authenticate screening requests and associate audit records with the authorized operator.</p>
             <div className="auth-badges"><span className="auth-badge"><BadgeCheck size={13} /> Auditable</span><span className="auth-badge"><Fingerprint size={13} /> Secure session</span><span className="auth-badge"><Sparkles size={13} /> Professional UI</span></div>
           </div>
-          <div className="auth-showcase-footer"><span>CT-OS // BUILD 2026.09</span><span>Authorized use only</span></div>
+          <div className="auth-showcase-footer"><span>DocKavach // BUILD 2026.09</span><span>Authorized use only</span></div>
         </div>
         <div className="auth-form-panel">
           <div className="auth-form-wrap">

@@ -1,7 +1,7 @@
 "use client";
 
 export function CTOsGlobe() {
-  return <div className="ctos-globe" aria-label="CT-OS India and global operations visualization" role="img">
+  return <div className="ctos-globe" aria-label="DocKavach India and global operations visualization" role="img">
     <div className="ctos-globe-ring ring-a" /><div className="ctos-globe-ring ring-b" />
     <div className="ctos-globe-core">
       <div className="ctos-grid longitude l1" /><div className="ctos-grid longitude l2" /><div className="ctos-grid longitude l3" />

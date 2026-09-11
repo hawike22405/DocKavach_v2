@@ -49,9 +49,9 @@ export default function DashboardPage() {
   return <div className="ctos-dashboard">
     <section className="ctos-hero" id="overview">
       <div className="ctos-hero-copy">
-        <div className="ctos-command-line"><span className="ctos-live-dot" /> CT-OS // NATIONAL IDENTITY SCREENING</div>
+        <div className="ctos-command-line"><span className="ctos-live-dot" /> DocKavach // NATIONAL IDENTITY SCREENING</div>
         <h1>Identity screening with <span>confidence and clarity.</span></h1>
-        <p>Review document evidence through a single, explainable workflow. CT-OS combines OCR, document validation, integrity analysis and face correspondence while keeping the final disposition with an authorized officer.</p>
+        <p>Review document evidence through a single, explainable workflow. DocKavach combines OCR, document validation, integrity analysis and face correspondence while keeping the final disposition with an authorized officer.</p>
         <div className="ctos-hero-actions"><a href="#screening" className="ctos-primary-link"><ScanLine size={16} /> Start screening <ArrowUpRight size={15} /></a><div className="ctos-classification"><LockKeyhole size={13} /> AUTHORIZED USE · AUDIT LOGGED</div></div>
       </div>
       <div className="ctos-globe-stage"><div className="ctos-globe-label label-top">NATIONAL OPERATIONS · <span>LIVE</span></div><CTOsGlobe /><div className="ctos-globe-label label-bottom">INDIA · SECURE OPERATIONS</div></div>
@@ -83,6 +83,6 @@ export default function DashboardPage() {
       {stage === "results" && result && <ResultsView result={result} documentImage={documentImages[0]} liveFaceImage={liveFaceImage} decision={officerDecision} onDecision={handleDecision} onNewScan={resetSession} decisionDisabled={savingDecision} />}
     </section>
 
-    <footer className="ctos-footer"><span>CT-OS // IDENTITY SCREENING</span><span><Sparkles size={10} style={{display:"inline", marginRight:5}} /> EXPLAINABLE OPERATIONS INTERFACE</span><span>BUILD 2026.09</span></footer>
+    <footer className="ctos-footer"><span>DocKavach // IDENTITY SCREENING</span><span><Sparkles size={10} style={{display:"inline", marginRight:5}} /> EXPLAINABLE OPERATIONS INTERFACE</span><span>BUILD 2026.09</span></footer>
   </div>;
 }

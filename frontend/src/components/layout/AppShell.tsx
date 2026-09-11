@@ -17,7 +17,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   return <AuthGuard>
     {showChrome && <Sidebar />}
     {showChrome && <header className="national-topbar">
-      <div className="national-topbar-left"><Landmark size={14} /><span className="national-route">CT-OS / NATIONAL IDENTITY SCREENING</span><span className="national-divider">/</span><span>{pathname === "/history" ? "AUDIT HISTORY" : pathname === "/settings" ? "SYSTEM SETTINGS" : "SCREENING CENTRE"}</span></div>
+      <div className="national-topbar-left"><Landmark size={14} /><span className="national-route">DocKavach / NATIONAL IDENTITY SCREENING</span><span className="national-divider">/</span><span>{pathname === "/history" ? "AUDIT HISTORY" : pathname === "/settings" ? "SYSTEM SETTINGS" : "SCREENING CENTRE"}</span></div>
       <div className="national-topbar-right"><span className="national-online"><i /> NETWORK ONLINE</span><span className="national-user"><ShieldCheck size={14} /> {officer?.name}</span><button onClick={signOut} title="Sign out" aria-label="Sign out" className="national-icon-button"><LogOut size={15} /></button></div>
     </header>}
     <main className={showChrome ? "cyber-app-main" : ""}>{children}</main>

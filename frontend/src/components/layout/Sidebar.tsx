@@ -16,7 +16,7 @@ export function Sidebar() {
   const pathname = usePathname();
   return (
     <aside className="cyber-sidebar">
-      <div className="cyber-logo-block"><div className="cyber-logo-mark"><ShieldCheck size={23} /></div><div><strong>CT-OS</strong><small>National Identity Screening</small></div></div>
+      <div className="cyber-logo-block"><div className="cyber-logo-mark"><ShieldCheck size={23} /></div><div><strong>DocKavach</strong><small>National Identity Screening</small></div></div>
       <div className="cyber-sidebar-rule" />
       <div className="national-side-kicker"><Landmark size={12} /> National operations</div>
       <nav className="cyber-nav" aria-label="Primary">

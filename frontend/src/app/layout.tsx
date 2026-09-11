@@ -3,7 +3,7 @@ import "./globals.css";
 import { AppShell } from "@/components/layout/AppShell";
 
 export const metadata: Metadata = {
-  title: "CT-OS | National Identity Screening",
+  title: "DocKavach | National Identity Screening",
   description: "Professional identity and document screening workspace for authorized operators.",
 };
 
