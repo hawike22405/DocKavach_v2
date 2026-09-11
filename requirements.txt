@@ -10,4 +10,4 @@ paddlepaddle==2.6.2
 opencv-contrib-python==4.6.0.66
 Pillow==10.4.0
 numpy==1.26.4
-Flask-Limiter==4.1.1
+Flask-Limiter==4.1.1gunicorn==22.0.0
