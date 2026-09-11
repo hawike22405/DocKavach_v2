@@ -26,7 +26,7 @@ def create_app():
 
     CORS(
         app,
-        resources={r"/api/*": {"origins": [Config.FRONTEND_ORIGIN]}},
+        resources={r"/api/*": {"origins": [Config.FRONTEND_ORIGIN, "http://localhost:*"]}},
         methods=["GET", "POST", "PUT", "OPTIONS"],
         allow_headers=["Content-Type", "Authorization"],
     )
