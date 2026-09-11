@@ -3,20 +3,10 @@ import "./globals.css";
 import { AppShell } from "@/components/layout/AppShell";
 
 export const metadata: Metadata = {
-  title: "Document Screening | SSB",
-  description: "AI-based identity and document screening for border checkpoints.",
+  title: "CT-OS | National Identity Screening",
+  description: "Professional identity and document screening workspace for authorized operators.",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="en">
-      <body className="min-h-screen bg-slate-900 font-sans antialiased">
-        <AppShell>{children}</AppShell>
-      </body>
-    </html>
-  );
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return <html lang="en"><body><AppShell>{children}</AppShell></body></html>;
 }

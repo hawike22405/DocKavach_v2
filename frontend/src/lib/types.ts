@@ -11,6 +11,8 @@ export interface ScreeningResponse {
   timestamp: string;
   overallRiskScore: number;
   recommendation: Recommendation;
+  recommendationReasons: string[];
+  finalDecisionRequired: boolean;
   module1_OCR: { name: string; documentNumber: string; dob: string; expiry: string; nationality: string; mrz: string; };
   module2_Validation: { isValid: boolean; errors: string[]; };
   module3_Tampering: { isTampered: boolean; confidence: number; anomalies: TamperingAnomaly[]; };

@@ -29,18 +29,18 @@ export default function HistoryPage() {
   }, []);
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-8">
-      <div className="mb-6 flex items-center justify-between">
+    <div className="cyber-page-wrap">
+      <div className="cyber-page-heading">
         <div>
-          <h1 className="text-lg font-semibold text-slate-100">History</h1>
-          <p className="mt-2 text-sm text-slate-400">Audit trail of completed document screenings.</p>
+          <div><p className="gov-eyebrow">03 // AUDIT STREAM</p><h1 className="cyber-section-title">History<span>_</span></h1>
+          <p className="cyber-section-copy">Immutable-style operator audit trail for completed document screenings.</p></div>
         </div>
-        <Button variant="ghost" onClick={loadHistory} disabled={loading}>Refresh</Button>
+        <Button variant="ghost" onClick={loadHistory} disabled={loading}>↻ Refresh stream</Button>
       </div>
 
       {error && <div role="alert" className="mb-4 rounded-md border border-danger/30 bg-danger/10 px-4 py-3 text-sm text-danger">{error}</div>}
 
-      <Card>
+      <Card className="cyber-panel">
         <CardHeading title="Screenings" description={loading ? "Loading…" : `${records.length} record${records.length === 1 ? "" : "s"} loaded`} />
         {loading ? (
           <p className="text-sm text-slate-500">Loading screening history…</p>
@@ -48,7 +48,7 @@ export default function HistoryPage() {
           <p className="text-sm text-slate-500">No screenings have been recorded yet.</p>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
+            <table className="cyber-table w-full text-left text-sm">
               <thead className="border-b border-border text-xs uppercase tracking-wide text-slate-500">
                 <tr>
                   <th className="px-3 py-3">Transaction</th>

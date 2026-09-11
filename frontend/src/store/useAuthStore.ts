@@ -1,7 +1,7 @@
 "use client";
 
 import { create } from "zustand";
-import { login as apiLogin, register as apiRegister, getMe, logout as apiLogout, type Officer } from "@/lib/api";
+import { login as apiLogin, register as apiRegister, getCurrentOfficer, logout as apiLogout, type Officer } from "@/lib/api";
 
 interface AuthState {
   officer: Officer | null;
@@ -27,7 +27,7 @@ export const useAuthStore = create<AuthState>((set) => ({
       return;
     }
     try {
-      const officer = await getMe();
+      const officer = await getCurrentOfficer();
       set({ officer: officer as Officer, loading: false });
     } catch {
       // Token expired or invalid — clear it

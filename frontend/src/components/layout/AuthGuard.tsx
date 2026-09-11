@@ -36,10 +36,10 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
   // Show a simple loading state while hydrating
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-slate-900">
+      <div className="ctos-auth-loading">
         <div className="flex flex-col items-center gap-3">
-          <div className="h-8 w-8 animate-spin rounded-full border-2 border-slate-600 border-t-cyan-400" />
-          <p className="text-sm text-slate-400">Loading…</p>
+          <div className="ctos-spinner" />
+          <p>Verifying secure operator session…</p>
         </div>
       </div>
     );

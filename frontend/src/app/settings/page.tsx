@@ -47,29 +47,28 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="mx-auto max-w-2xl px-6 py-8">
-      <div className="mb-6">
-        <h1 className="text-lg font-semibold text-slate-100">Settings</h1>
-        <p className="mt-2 text-sm text-slate-400">Station configuration and screening preferences.</p>
+    <div className="cyber-page-wrap cyber-settings-page">
+      <div className="cyber-page-heading">
+        <div><p className="gov-eyebrow">04 // CONTROL LAYER</p><h1 className="cyber-section-title">System settings<span>_</span></h1><p className="cyber-section-copy">Configure checkpoint identity and screening thresholds.</p></div>
       </div>
 
       {loading ? (
-        <Card><p className="text-sm text-slate-500">Loading settings…</p></Card>
+        <Card className="cyber-panel"><p className="text-sm text-slate-500">Loading settings…</p></Card>
       ) : (
         <Card>
           <CardHeading title="Checkpoint configuration" description="These values are stored per officer account." />
           <form onSubmit={save} className="space-y-4">
             <label className="block">
               <span className="text-sm text-slate-300">Station name</span>
-              <input value={settings.stationName} onChange={(e) => setSettings({ ...settings, stationName: e.target.value })} className="mt-1 w-full rounded-md border border-border bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-cyan-400" />
+              <input value={settings.stationName} onChange={(e) => setSettings({ ...settings, stationName: e.target.value })} className="cyber-input mt-1 w-full" />
             </label>
             <label className="block">
               <span className="text-sm text-slate-300">Checkpoint ID</span>
-              <input value={settings.checkpointId} onChange={(e) => setSettings({ ...settings, checkpointId: e.target.value })} className="mt-1 w-full rounded-md border border-border bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-cyan-400" />
+              <input value={settings.checkpointId} onChange={(e) => setSettings({ ...settings, checkpointId: e.target.value })} className="cyber-input mt-1 w-full" />
             </label>
             <label className="block">
               <span className="text-sm text-slate-300">Auto-flag threshold</span>
-              <input type="number" min={0} max={100} value={settings.autoFlagThreshold} onChange={(e) => setSettings({ ...settings, autoFlagThreshold: Number(e.target.value) })} className="mt-1 w-full rounded-md border border-border bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-cyan-400" />
+              <input type="number" min={0} max={100} value={settings.autoFlagThreshold} onChange={(e) => setSettings({ ...settings, autoFlagThreshold: Number(e.target.value) })} className="cyber-input mt-1 w-full" />
             </label>
             {error && <p role="alert" className="text-sm text-danger">{error}</p>}
             {message && <p className="text-sm text-success">{message}</p>}

@@ -115,39 +115,6 @@ export async function login(email: string, password: string) {
 export async function getCurrentOfficer() {
   return request<Officer>("/auth/me");
 }
-// alias used by useAuthStore
-export const getMe = getCurrentOfficer;
-
-export type ActivityLog = {
-  _id: string;
-  action: "LOGIN" | "LOGIN_FAILED" | "REGISTER" | "SCREENING" | "DECISION";
-  officerId: string | null;
-  email: string | null;
-  name: string | null;
-  ip: string | null;
-  timestamp: string;
-  transactionId?: string;
-  documentType?: string;
-  recommendation?: string;
-  riskScore?: number;
-  decision?: string;
-};
-
-export type ActivityLogResponse = {
-  records: ActivityLog[];
-  page: number;
-  limit: number;
-  total: number;
-};
-
-export async function getActivityLogs(params: { page?: number; limit?: number; action?: string } = {}) {
-  const search = new URLSearchParams();
-  if (params.page) search.set("page", String(params.page));
-  if (params.limit) search.set("limit", String(params.limit));
-  if (params.action) search.set("action", params.action);
-  const suffix = search.toString() ? `?${search.toString()}` : "";
-  return request<ActivityLogResponse>(`/logs${suffix}`);
-}
 
 export function logout() {
   if (typeof window !== "undefined") localStorage.removeItem("token");

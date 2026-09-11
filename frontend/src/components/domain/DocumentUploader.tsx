@@ -74,7 +74,7 @@ export function DocumentUploader({ imageUrl, onChange }: DocumentUploaderProps) 
           <>
             <UploadCloud className="h-7 w-7 text-slate-500" aria-hidden="true" />
             <p className="text-sm text-slate-300">Drag a document image here, or click to browse</p>
-            <p className="text-xs text-slate-500">Passport or Visa · JPG/PNG · up to 2MB</p>
+            <p className="text-xs text-slate-500">Passport · Visa · National ID · JPG/PNG · up to 2MB</p>
           </>
         )}
         <input ref={inputRef} type="file" accept="image/*" className="sr-only" onChange={(e) => handleFile(e.target.files?.[0])} />

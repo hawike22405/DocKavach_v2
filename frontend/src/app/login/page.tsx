@@ -2,13 +2,11 @@
 
 import Link from "next/link";
 import { FormEvent, useState } from "react";
-import { useRouter } from "next/navigation";
-import { Card, CardHeading } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
-import { login } from "@/lib/api";
+import { ArrowRight, BadgeCheck, Fingerprint, Landmark, LockKeyhole, ShieldCheck, Sparkles } from "lucide-react";
+import { useAuthStore } from "@/store/useAuthStore";
 
 export default function LoginPage() {
-  const router = useRouter();
+  const signIn = useAuthStore((state) => state.login);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -16,39 +14,45 @@ export default function LoginPage() {
 
   const submit = async (event: FormEvent) => {
     event.preventDefault();
-    setLoading(true);
-    setError(null);
+    setLoading(true); setError(null);
     try {
-      await login(email, password);
-      router.replace("/");
-      router.refresh();
+      await signIn(email.trim(), password);
+      window.location.replace("/");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Login failed");
-    } finally {
-      setLoading(false);
-    }
+    } finally { setLoading(false); }
   };
 
   return (
-    <div className="mx-auto flex min-h-[70vh] max-w-md items-center px-6 py-8">
-      <Card className="w-full">
-        <CardHeading title="Officer sign in" description="Use your DocKavach officer account." />
-        <form onSubmit={submit} className="space-y-4">
-          <label className="block">
-            <span className="text-sm text-slate-300">Email</span>
-            <input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="mt-1 w-full rounded-md border border-border bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-cyan-400" />
-          </label>
-          <label className="block">
-            <span className="text-sm text-slate-300">Password</span>
-            <input required type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="mt-1 w-full rounded-md border border-border bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none focus:border-cyan-400" />
-          </label>
-          {error && <p role="alert" className="text-sm text-danger">{error}</p>}
-          <Button type="submit" variant="primary" className="w-full" disabled={loading}>{loading ? "Signing in…" : "Sign in"}</Button>
-        </form>
-        <p className="mt-4 text-center text-sm text-slate-500">
-          No officer account? <Link href="/register" className="text-cyan-300 hover:text-cyan-200">Create one</Link>
-        </p>
-      </Card>
-    </div>
+    <main className="auth-national-page">
+      <div className="auth-national-bg" aria-hidden="true"><div className="auth-orb auth-orb-a" /><div className="auth-orb auth-orb-b" /><div className="auth-tricolor" /></div>
+      <section className="auth-shell">
+        <div className="auth-showcase">
+          <div className="auth-brand"><div className="auth-emblem"><ShieldCheck size={29} /></div><div><strong>CT-OS</strong><small>National Identity Screening</small></div></div>
+          <div className="auth-showcase-copy">
+            <div className="auth-kicker"><Landmark size={13} /> National operations workspace</div>
+            <h1>Identity verification built for <span>clarity.</span></h1>
+            <p>A focused screening workspace combining document evidence, OCR, integrity checks and face correspondence into an auditable operator workflow.</p>
+            <div className="auth-badges"><span className="auth-badge"><BadgeCheck size={13} /> Evidence-led</span><span className="auth-badge"><Fingerprint size={13} /> Explainable checks</span><span className="auth-badge"><Sparkles size={13} /> Modern interface</span></div>
+          </div>
+          <div className="auth-showcase-footer"><span>CT-OS // BUILD 2026.09</span><span>Authorized use only</span></div>
+        </div>
+        <div className="auth-form-panel">
+          <div className="auth-form-wrap">
+            <div className="auth-topline"><span><LockKeyhole size={11} /> Secure operator access</span><span className="auth-live"><i /> Network ready</span></div>
+            <div className="auth-heading"><p className="auth-kicker">Welcome back</p><h2>Sign in to CT-OS</h2><p>Use your registered operator credentials to enter the screening centre.</p></div>
+            <form onSubmit={submit} className="auth-form">
+              <label className="auth-field"><span>Officer email</span><input className="auth-input" required type="email" autoComplete="email" placeholder="officer@example.gov" value={email} onChange={(e) => setEmail(e.target.value)} /></label>
+              <label className="auth-field"><span>Password</span><input className="auth-input" required type="password" autoComplete="current-password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} /></label>
+              {error && <div className="auth-error" role="alert">{error}</div>}
+              <button className="auth-submit" type="submit" disabled={loading}><span>{loading ? "VERIFYING SESSION..." : "ENTER SCREENING CENTRE"}</span><ArrowRight size={17} /></button>
+            </form>
+            <div className="auth-divider"><span>New operator</span></div>
+            <Link href="/register" className="auth-secondary">Create an operator account <ArrowRight size={15} /></Link>
+            <div className="auth-footer"><span>Session protected</span><span>•</span><span>Audit logging enabled</span></div>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
