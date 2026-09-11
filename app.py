@@ -26,7 +26,7 @@ def create_app():
 
     CORS(
         app,
-        resources={r"/api/*": {"origins": [Config.FRONTEND_ORIGIN, "http://localhost:*"]}},
+        resources={r"/api/*": {"origins": Config.FRONTEND_ORIGINS}},
         methods=["GET", "POST", "PUT", "OPTIONS"],
         allow_headers=["Content-Type", "Authorization"],
     )
@@ -48,7 +48,7 @@ def create_app():
     @app.route("/", methods=["GET"])
     def root_redirect():
         from flask import redirect
-        return redirect(Config.FRONTEND_ORIGIN)
+        return redirect(Config.FRONTEND_ORIGINS[0])
 
     @app.errorhandler(400)
     def bad_request(e):
