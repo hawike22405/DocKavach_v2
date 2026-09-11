@@ -45,6 +45,11 @@ def create_app():
     def health():
         return {"success": True, "message": "DocKavach backend alive"}
 
+    @app.route("/", methods=["GET"])
+    def root_redirect():
+        from flask import redirect
+        return redirect(Config.FRONTEND_ORIGIN)
+
     @app.errorhandler(400)
     def bad_request(e):
         return {"success": False, "message": "Malformed request"}, 400
