@@ -5,13 +5,13 @@ export type ScanStage = "capture" | "processing" | "results";
 interface ScanState {
   stage: ScanStage;
   documentType: DocumentType;
-  documentImage: string | null;
+  documentImages: string[];
   liveFaceImage: string | null;
   processingStepIndex: number;
   result: ScreeningResponse | null;
   officerDecision: "APPROVE" | "FLAG" | "REJECT" | null;
   setDocumentType: (type: DocumentType) => void;
-  setDocumentImage: (url: string | null) => void;
+  setDocumentImages: (urls: string[]) => void;
   setLiveFaceImage: (url: string | null) => void;
   startProcessing: () => void;
   setProcessingStep: (index: number) => void;
@@ -23,7 +23,7 @@ interface ScanState {
 const initialState = {
   stage: "capture" as ScanStage,
   documentType: "PASSPORT" as DocumentType,
-  documentImage: null,
+  documentImages: [],
   liveFaceImage: null,
   processingStepIndex: -1,
   result: null,
@@ -33,7 +33,7 @@ const initialState = {
 export const useScanStore = create<ScanState>((set) => ({
   ...initialState,
   setDocumentType: (type) => set({ documentType: type }),
-  setDocumentImage: (url) => set({ documentImage: url }),
+  setDocumentImages: (urls) => set({ documentImages: urls }),
   setLiveFaceImage: (url) => set({ liveFaceImage: url }),
   startProcessing: () => set({ stage: "processing", processingStepIndex: -1 }),
   setProcessingStep: (index) => set({ processingStepIndex: index }),

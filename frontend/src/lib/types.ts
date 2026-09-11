@@ -3,7 +3,7 @@ export type Recommendation = "APPROVE" | "REVIEW" | "REJECT";
 export type TamperingAnomalyType = "PHOTO_REPLACEMENT" | "FONT_MISMATCH" | "METADATA";
 export type OfficerDecision = "APPROVE" | "FLAG" | "REJECT";
 
-export interface ScreeningRequest { documentImageBase64: string; documentType: DocumentType; liveFaceBase64?: string; }
+export interface ScreeningRequest { documentImagesBase64: string[]; documentType: DocumentType; liveFaceBase64?: string; }
 export interface BoundingBox { x: number; y: number; w: number; h: number; }
 export interface TamperingAnomaly { type: TamperingAnomalyType; description: string; boundingBox?: BoundingBox; }
 export interface ScreeningResponse {

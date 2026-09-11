@@ -9,7 +9,7 @@ import datetime
 from flask import Blueprint, request, g
 from db import get_db
 from utils.response import ok, fail
-from utils.image_utils import decode_base64_image, ImageDecodeError
+from utils.image_utils import decode_base64_image, decode_and_merge_documents, ImageDecodeError
 from middleware.auth_required import auth_required
 from services.ocr_service import run_ocr
 from services.validation_service import validate_fields
@@ -28,17 +28,17 @@ VALID_DOC_TYPES = {"PASSPORT", "VISA", "NATIONAL_ID"}
 @auth_required
 def screen_document():
     body = request.get_json(silent=True) or {}
-    doc_b64 = body.get("documentImageBase64")
+    doc_b64s = body.get("documentImagesBase64", [])
     document_type = body.get("documentType")
     live_b64 = body.get("liveFaceBase64")
 
-    if not doc_b64:
-        return fail("documentImageBase64 is required", 422)
+    if not doc_b64s or not isinstance(doc_b64s, list) or len(doc_b64s) == 0:
+        return fail("documentImagesBase64 array is required", 422)
     if document_type not in VALID_DOC_TYPES:
         return fail(f"documentType must be one of {sorted(VALID_DOC_TYPES)}", 422)
 
     try:
-        doc_img = decode_base64_image(doc_b64)
+        doc_img = decode_and_merge_documents(doc_b64s)
     except ImageDecodeError as e:
         return fail(str(e), 422)
 

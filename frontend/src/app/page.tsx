@@ -23,15 +23,15 @@ const DOCUMENT_TYPES: { value: DocumentType; label: string; hint: string }[] = [
 
 export default function DashboardPage() {
   const { officer } = useAuthStore();
-  const { stage, documentType, documentImage, liveFaceImage, processingStepIndex, result, officerDecision, setDocumentType, setDocumentImage, setLiveFaceImage, startProcessing, setProcessingStep, setResult, setOfficerDecision, resetSession } = useScanStore();
+  const { stage, documentType, documentImages, liveFaceImage, processingStepIndex, result, officerDecision, setDocumentType, setDocumentImages, setLiveFaceImage, startProcessing, setProcessingStep, setResult, setOfficerDecision, resetSession } = useScanStore();
   const [error, setError] = useState<string | null>(null);
   const [savingDecision, setSavingDecision] = useState(false);
 
   const runScreening = async () => {
-    if (!documentImage || !liveFaceImage) return;
+    if (documentImages.length === 0 || !liveFaceImage) return;
     setError(null); startProcessing();
     try {
-      const response = await screenDocument({ documentImageBase64: documentImage, documentType, liveFaceBase64: liveFaceImage }, setProcessingStep);
+      const response = await screenDocument({ documentImagesBase64: documentImages, documentType, liveFaceBase64: liveFaceImage }, setProcessingStep);
       setProcessingStep(3); setResult(response);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Screening request failed"); resetSession();
@@ -73,14 +73,14 @@ export default function DashboardPage() {
           </div>
         </div>
         <div className="ctos-evidence-grid">
-          <Card className="ctos-evidence-card"><div className="ctos-card-index">01</div><CardHeading title="Document evidence" description={documentType === "PASSPORT" ? "Passport photo page with MRZ fully visible" : documentType === "VISA" ? "Visa page with all printed fields visible" : "National identity card, front side"} /><DocumentUploader imageUrl={documentImage} onChange={setDocumentImage} /></Card>
+          <Card className="ctos-evidence-card"><div className="ctos-card-index">01</div><CardHeading title="Document evidence" description={documentType === "PASSPORT" ? "Passport photo page with MRZ fully visible" : documentType === "VISA" ? "Visa page with all printed fields visible" : "National identity card, front side"} /><DocumentUploader imageUrls={documentImages} onChange={setDocumentImages} /></Card>
           <Card className="ctos-evidence-card"><div className="ctos-card-index">02</div><CardHeading title="Live face capture" description="Current facial image for correspondence analysis" /><FaceCapture imageUrl={liveFaceImage} onChange={setLiveFaceImage} /></Card>
         </div>
-        <div className="ctos-submit-bar"><div><BadgeCheck size={17} /><span>Two-source evidence is required before analysis can begin.</span></div><Button variant="primary" disabled={!documentImage || !liveFaceImage} onClick={runScreening}><ScanLine size={16} /> Execute screening</Button></div>
+        <div className="ctos-submit-bar"><div><BadgeCheck size={17} /><span>Two-source evidence is required before analysis can begin.</span></div><Button variant="primary" disabled={documentImages.length === 0 || !liveFaceImage} onClick={runScreening}><ScanLine size={16} /> Execute screening</Button></div>
       </>}
 
       {stage === "processing" && <ProcessingStepper currentStepIndex={processingStepIndex} />}
-      {stage === "results" && result && <ResultsView result={result} documentImage={documentImage} liveFaceImage={liveFaceImage} decision={officerDecision} onDecision={handleDecision} onNewScan={resetSession} decisionDisabled={savingDecision} />}
+      {stage === "results" && result && <ResultsView result={result} documentImage={documentImages[0]} liveFaceImage={liveFaceImage} decision={officerDecision} onDecision={handleDecision} onNewScan={resetSession} decisionDisabled={savingDecision} />}
     </section>
 
     <footer className="ctos-footer"><span>CT-OS // IDENTITY SCREENING</span><span><Sparkles size={10} style={{display:"inline", marginRight:5}} /> EXPLAINABLE OPERATIONS INTERFACE</span><span>BUILD 2026.09</span></footer>

@@ -135,7 +135,7 @@ export async function screenDocument(screenRequest: ScreeningRequest, onStep?: (
   try {
     const normalizedRequest: ScreeningRequest = {
       ...screenRequest,
-      documentImageBase64: await imageSourceToDataUrl(screenRequest.documentImageBase64),
+      documentImagesBase64: await Promise.all(screenRequest.documentImagesBase64.map(imageSourceToDataUrl)),
       liveFaceBase64: screenRequest.liveFaceBase64
         ? await imageSourceToDataUrl(screenRequest.liveFaceBase64)
         : undefined,

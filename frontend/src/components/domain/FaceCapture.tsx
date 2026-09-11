@@ -23,14 +23,14 @@ export function FaceCapture({ imageUrl, onChange }: FaceCaptureProps) {
     <div>
       <div className="relative flex h-48 items-center justify-center overflow-hidden rounded-md border border-border bg-slate-950">
         {imageUrl ? (
-          <img src={imageUrl} alt="Captured live photo" className="h-full w-full object-cover" />
+          <img src={imageUrl} alt="Captured live photo" className="h-full w-full object-contain bg-black" />
         ) : cameraError ? (
           <div className="flex flex-col items-center gap-2 px-4 text-center">
             <UserRound className="h-7 w-7 text-slate-500" aria-hidden="true" />
             <p className="text-xs text-slate-500">Camera unavailable — check browser permissions</p>
           </div>
         ) : (
-          <Webcam ref={webcamRef} audio={false} mirrored screenshotFormat="image/jpeg" onUserMediaError={() => setCameraError(true)} className="h-full w-full object-cover" />
+          <Webcam ref={webcamRef} audio={false} mirrored screenshotFormat="image/jpeg" onUserMediaError={() => setCameraError(true)} className="h-full w-full object-contain bg-black" />
         )}
       </div>
       <div className="mt-2 flex justify-center">
