@@ -23,6 +23,8 @@ function buildMockResponse(request: ScreeningRequest): ScreeningResponse {
     timestamp: new Date().toISOString(),
     overallRiskScore,
     recommendation,
+    recommendationReasons: flagged ? ["Document expiry date has passed", "MRZ checksum digit mismatch", "Document tampering detected"] : ["All automated checks passed"],
+    finalDecisionRequired: true,
     module1_OCR: { name: "RAVI KUMAR SHARMA", documentNumber: "P8317462", dob: "1991-04-12", expiry: flagged ? "2024-11-03" : "2029-11-03", nationality: "IND", mrz: "P<INDSHARMA<<RAVI<KUMAR<<<<<<<<<<<<<<<<<<<<<\nP8317462<3IND9104123M2911031<<<<<<<<<<<<<<08" },
     module2_Validation: { isValid: !flagged, errors: flagged ? ["Document expiry date has passed", "MRZ checksum digit mismatch on line 2"] : [] },
     module3_Tampering: {

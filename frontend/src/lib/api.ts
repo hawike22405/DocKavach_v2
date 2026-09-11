@@ -141,10 +141,31 @@ export async function screenDocument(screenRequest: ScreeningRequest, onStep?: (
         : undefined,
     };
 
-    return await request<ScreeningResponse>("/screen", {
+    const response = await request<ScreeningResponse>("/screen", {
       method: "POST",
       body: JSON.stringify(normalizedRequest),
     });
+
+    if (response) {
+      response.recommendationReasons = response.recommendationReasons || [];
+      if (response.recommendationReasons.length === 0) {
+        if (response.module2_Validation?.errors?.length > 0) {
+          response.recommendationReasons.push(...response.module2_Validation.errors);
+        }
+        if (response.module3_Tampering?.isTampered) {
+          response.recommendationReasons.push("Document tampering detected");
+        }
+        if (response.module4_FaceMatch && !response.module4_FaceMatch.isMatch) {
+          response.recommendationReasons.push("Face match failed");
+        }
+        if (response.recommendationReasons.length === 0) {
+          response.recommendationReasons.push("All automated checks passed");
+        }
+      }
+      response.finalDecisionRequired = true;
+    }
+
+    return response;
   } finally {
     timers.forEach((timer) => window.clearTimeout(timer));
   }
